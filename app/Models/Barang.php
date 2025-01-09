@@ -18,7 +18,7 @@ class Barang extends Model
     protected function poto(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => asset('storage/posts/' . $value),
+            get: fn ($value) => asset('storage/barangs/' . $value),
         );
     }
 }

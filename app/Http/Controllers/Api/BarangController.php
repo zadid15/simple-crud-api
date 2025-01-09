@@ -32,7 +32,7 @@ class BarangController extends Controller
 
         $poto = $request->file('poto');
         $new_name = rand() . '.' . $poto->getClientOriginalExtension();
-        $poto->move(public_path('storage/posts'), $new_name);
+        $poto->move(public_path('storage/barangs'), $new_name);
 
         $barang = Barang::create([
             'nama_barang' => $request->nama_barang,
@@ -76,9 +76,9 @@ class BarangController extends Controller
         $barang = Barang::find($id);
         if ($request->hasFile('poto')) {
             $poto = $request->file('poto');
-            $poto->storeAs('public/posts', $poto->hashName());
+            $poto->storeAs('public/barangs', $poto->hashName());
 
-            Storage::delete('public/posts/' . $barang->poto);
+            Storage::delete('public/barangs/' . $barang->poto);
 
             $barang->update([
                 'nama_barang' => $request->nama_barang,
@@ -105,7 +105,7 @@ class BarangController extends Controller
                 'message' => 'Data Barang Tidak Ditemukan',
             ], 404);
         }
-        Storage::delete('public/posts/' . $barang->poto);
+        Storage::delete('public/barangs/' . $barang->poto);
         $barang->delete();
         return new BarangResource(true, 'Data Barang Berhasil Dihapus!', null);
     }
